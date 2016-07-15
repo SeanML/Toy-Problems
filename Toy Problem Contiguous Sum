@@ -1,0 +1,46 @@
+// function sumArray (array) {
+//   var arrayMax = Math.max.apply(null,array);
+//   var total = 0;
+//   var currentMax = array[0];
+//   var absoluteTotal = 0;
+//   for(var i = 0; i < array.length; i++) {
+//     absoluteTotal += array[i]
+//     if(total + array[i] > currentMax) {
+//       total += array[i];
+//       currentMax += array[i];
+//     } else if (total + array[i] < currentMax)
+//       total = 0;
+//   }
+//   if(currentMax < absoluteTotal && absoluteTotal > arrayMax) {
+//     return absoluteTotal;
+//   } else if (absoluteTotal < arrayMax && currentMax < arrayMax) {
+//     return arrayMax;
+//   } else {
+//     return currentMax;
+//   }
+// }
+
+
+function sumArray (array) {
+  var arrayMax = Math.max.apply(null,array);
+  var total = array[0];
+  var currentMax = array[0];
+  var absoluteTotal = array[0];
+  for(var i = 1; i < array.length; i++) {
+    // Total of all items in the array (basically a reduce)
+    absoluteTotal += array[i]
+    // If the total plus current index greater than current max
+    // Take the current total and increment by current index
+    // Set current max to this new total
+    if(total + array[i] >= currentMax) {
+      total += array[i];
+      currentMax = total;
+    // If the total plus current index is less than current max
+    // Reset total to current index
+    } else if (total + array[i] < currentMax)
+      total = array[i];
+  }
+  // Return the max of current max, absolute total, and array max
+  return Math.max(currentMax, absoluteTotal, arrayMax);
+}
+

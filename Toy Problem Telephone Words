@@ -1,0 +1,65 @@
+var telChars = {
+  0: ["0"],
+  1: ["1"],
+  2: ["A","B","C"],
+  3: ["D","E","F"],
+  4: ["G","H","I"],
+  5: ["J","K","L"],
+  6: ["M","N","O"],
+  7: ["P","Q","R","S"],
+  8: ["T","U","V"],
+  9: ["W","X","Y","Z"]
+};
+
+// function telephoneWords (digitString) {
+//   var results = [];
+//   var currentResult = 0;
+//   var loopCount = 0;
+  
+//   function recurse(digit, currentResult) {   
+//     if(currentResult.length === 4) {
+//       results.push(currentResult);
+//       currentResult = null;
+//     }
+    
+//     if(loopCount < digitString.length) {
+//       if(telChars[digit].length === 1) {
+//           currentResult += telChars[digit];
+//           loopCount++;
+//           recurse(digitString[loopCount], currentResult);
+//       } else {
+//         for(var i = 0; i < telChars[digit].length; i++) {
+//             loopCount++;
+//             recurse(digitString[loopCount], currentResult += (telChars[digit][i]));
+//         }
+//       }
+//     } else {
+//       return results;
+//     }
+//   }
+//   recurse(digitString[loopCount], currentResult);
+//   return results;
+// }
+
+// telephoneWords("0130")
+
+function telephoneWords (digitString) {
+  var currentResult = [];
+  var loopCount = 0;
+
+  function recurse(string, loopCount) {
+    if(loopCount < digitString.length) {
+      loopCount = 0;
+      currentResult.push(string);
+    } else {
+      var digit = telChars[digitString.charAt(loopCount)];
+      for(var i = 0; i < digit.length; i++) {
+        loopCount++;
+        recurse(string + digit[i], loopCount);
+      }
+    }
+    return currentResult;
+  }
+  recurse("", loopCount);
+  return currentResult;
+}

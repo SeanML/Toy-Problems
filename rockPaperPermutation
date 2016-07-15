@@ -1,0 +1,64 @@
+// function rockPaperPermutation (roundCount) {
+//   // Write your code here, and
+//   // return your final answer.
+
+//   // Establishes an array to hold all permutations
+//   var possibilities = [];
+
+//   // Base case possibilities
+//   var rockPaperScissors = ["r","p","s"];
+  
+//   // Base case if there are 0 rounds
+//   if(roundCount === 0) {
+//     return possibilities;
+//   }
+  
+//   // Base case if there is 1 round
+//   if(roundCount === 1) {
+//     return rockPaperScissors;
+//   }
+
+//   // Calls permutation function if more than 1 round
+//   if(roundCount > 1) {
+//     return permutations(rockPaperScissors,roundCount);
+//   }
+  
+//   // Permutations function
+//   function permutations(rockPaperScissors, roundCount) {
+//     // Create variables for each possibility
+//     var possibility1 = "";
+//     var possibility2 = "";
+
+//     for(var i = 0; i < rockPaperScissors.length; i++) {
+//       possibility1 = rockPaperScissors[i];
+//       for(var j = 0; j < roundCount; j++) {
+//         possibility2 = rockPaperScissors[j];
+//         possibilities.push(possibility1 + possibility2);
+//       }
+//     }
+
+//     return possibilities;
+//   }
+// };
+
+
+function rockPaperPermutation(roundCount) {
+  var result = ["r", "p", "s"];
+  var rPS = ["r", "p", "s"];
+  var temp = [];
+  if(!roundCount) {
+    return [];
+  }
+  console.log("inside rPS");
+  while (roundCount - 1) {
+    for (var i = 0; i < result.length; i++) {
+      for (var j = 0; j < rPS.length; j++) {
+        temp.push(result[i] + rPS[j]);
+      }
+    }
+    result = temp;
+    temp = [];
+    roundCount--;
+  }
+  return result;
+}
