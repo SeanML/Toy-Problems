@@ -1,43 +1,25 @@
 function longestPalindrome (string) {
-  var strArr = string.split("");
-  var reversed = string.split("").reverse();
-  var currResult = [];
-  var temp = "";
-  
-  for(var i = 0; i < strArr.length; i++) {
-    if(strArr[i] !== reversed[i]) {
-      if(temp.length > 0) {
-        currResult.push(temp);
-      }
-      temp = "";
+  let len = string.length;
+  let result = "";
+
+  function center(left, right) {
+    while(left >= 0 && right < len && string[left] === string[right]) {
+      left--;
+      right++;
     }
-    
-    if(strArr[i] === reversed[i]) {
-      temp += strArr[i];
+    return string.slice(left + 1, right);
+  }
+
+  for(let i = 0; i < len - 1; i++) {
+    let oddLen = center(i, i + 1);
+    let evenLen = center(i, i);
+
+    if(oddLen.length > result.length) {
+      result = oddLen;
+    }
+    if(evenLen.length > result.length) {
+      result = evenLen;
     }
   }
-  return currResult.join("");
+  return result;
 }
-
-
-// function longestPalindrome (string) {
-//   var strArr = string.split("");
-//   var currResult = [];
-//   var temp = "";
-  
-//   for(var i = 0; i < strArr.length; i++) {
-//     for(var j = strArr.length - 1; j >= 0; j--) {
-//       if(strArr[i] !== strArr[j]) {
-//         if(temp.length > 0) {
-//           currResult.push(temp);
-//         }
-//         temp = "";
-//       }
-      
-//       if(strArr[i] === strArr[j]) {
-//         temp += strArr[i];
-//       }
-//     }
-//   }
-//   return currResult;
-// }
